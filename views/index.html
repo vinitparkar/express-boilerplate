@@ -1,28 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>React Personal Portfolio Boilerplate</title>
-    <link rel="icon" type="image/x-icon" href="images/fullstack.ico" />
-    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="jumbotron">
-          <h1>{{ title }}</h1>
-          <p>This is a bare-bones template.</p>
-          <ul>
-          {% for person in people %}
-            <li>{{ person.name }}</li>
-          {% endfor %}
-          </ul>
-        </div>
-      </div>
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="page-header">
+    <h1>Welcome to {{title}}</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="https://scontent-lga3-1.cdninstagram.com/t51.2885-19/s320x320/12905059_1088374401200740_377217664_a.jpg"><br>
+      <b>Eren (Junjie) Chen</b><br>
+      100 followers
     </div>
-    <script src="jquery/dist/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
+    <div class="col-md-9">
+
+      <div id="tweets">
+        <!-- display tweets here -->
+        {% for tweet in tweets %}
+          <div class="tweetbox">
+            <div class="content">
+              <p class="by"><a href="/users/{{tweet.name}}">{{tweet.name}}</a></p>
+              <p><a href="/tweets/{{tweet.id}}">{{tweet.content}}</a></p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if showForm %}
+        <form action="/tweets" method="POST">
+          <label for="name_field">Name:</label>
+          <input name="name" value="{{value}}" type="text" id="name_field" />
+
+          <label for="text_field">Text:</label>
+          <input name="text" type="text" id="text_field" style="width: 350px;" />
+
+          <input type="submit" value="Submit" />
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

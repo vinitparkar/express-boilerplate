@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "start-dev": "nodemon server",
+    "start": "node app",
+    "start-dev": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,9 +16,11 @@
     "bootstrap": "^3.3.7",
     "express": "^4.16.2",
     "jquery": "^1.12.4",
+    "lodash": "^4.17.4",
     "morgan": "^1.9.0",
     "nunjucks": "^3.0.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

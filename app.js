@@ -1,5 +1,10 @@
 const express = require('express');
 const app = express();
+const socketio = require('socket.io');
+const server = app.listen(8080, () => {
+  console.log('Server is listening on port 8080!');
+});
+const io = socketio.listen(server);
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
@@ -18,7 +23,9 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
-app.use(routes);
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(routes(io));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
